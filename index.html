@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Babastudio API</title>
+    <link rel="shortcut icon" type="image/x-icon" href="https://www.babastudio.com/assets/front_page/img/icon/favicon.ico">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="https://getbootstrap.com/docs/4.3/examples/starter-template/starter-template.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-md fixed-top" style="background-image: linear-gradient(141deg, #212529 0%, #1f2ddb 51%, #e82c2c 75%);">
+      <a class="navbar-brand" href="#"><img src="https://www.babastudio.com/assets/front_page/img/icon/logo.png"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto"></ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a href="#" class="nav-link" style="color: white;">Home</a>
+          </li>
+          <li><a href="#" class="nav-link" style="color: white;">Logout</a></li>
+        </ul>
+      </div>
+    </nav>
+
+<main role="main" class="container">
+
+  <div class="starter-template">
+    <button id="new" class="btn btn-primary" onclick="showModal()" style="background: orange" data-toggle="modal" data-target="#modal">New Post</button>
+    <div id="content-post">
+
+    </div>
+  </div>
+
+</main><!-- /.container -->
+
+   <!-- Modal -->
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+aria-hidden="true">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <form enctype="multipart/form-data" id="add-post">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold" id="modal-judul">NEW POST</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div id="alert-modal">
+
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <label data-error="wrong" data-success="right" for="form34">Title</label>
+          <input type="text" id="title-post" class="form-control validate" style="border: 1px solid #333;" name="title">
+          
+        </div>
+
+        <div class="md-form mb-5">
+          <label data-error="wrong" data-success="right" for="form29">Images</label>
+          <input type="file" id="image" name="image" class="form-control validate">
+        </div>
+
+        <div class="md-form mb-5" id="area-image-old" style="display: none;">
+          <label data-error="wrong" data-success="right" for="form29">Images Old</label>
+          <img src="" id="image-old" class="form-control" style="width: 200px;">
+        </div>
+
+        <div class="md-form">
+          <label data-error="wrong" data-success="right" for="form8">Content</label>
+          <textarea type="text" id="content-post" name="content" class="md-textarea form-control" rows="4" style="border: 1px solid #333;"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <input type="hidden" id="id-post">
+        <button class="btn btn-primary" style="width: 100%;" type="submit">Send</button>
+      </div>
+    </form>
+  </div>
+</div>
+</div>
+
+  <script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+  <script>
+    $.urlParam = function(name){
+      var result = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+      return result[1] || 0;
+    }
+
+    let params = $.urlParam('token');
+    ReadData();
+    function showModal(id){
+      if(id){
+        // Edit
+        $('#modal').modal('show');
+        $('#modal-judul').html('Edit Post');
+        $.getJSON('http://localhost:8080/babastudio/detail/' + id, function(data){
+          var detail = data.post;
+
+          $('#title-post').val(detail.title);
+          $('textarea#content-post').val(detail.content);
+          $('#area-image-old').show();
+          $('#image-old').attr('src','http://localhost:8080/images/' + detail.imageUrl);
+          $('#id-post').val(detail._id);
+          $('#add-post').attr('action', '#');
+          $('#add-post').attr('method', '');
+        });
+      }else{
+        // New
+        $('#modal-judul').html('New Post');
+        $('#title-post').val('');
+        $('textarea#content-post').val('');
+        $('#area-image-old').hide();
+        $('#id-post').val('');
+        $('#add-post').attr('action', 'http://localhost:8080/babastudio/create');
+        $('#add-post').attr('method', 'post');
+      }      
+    };
+
+    function ReadData(){
+      $.getJSON('http://localhost:8080/babastudio/posts/' + params, function(data){
+        console.log(data);
+        var isi_data = "";
+
+        $.each(data.posts, function(i, items){
+          var ids = '"' + items._id + '"';
+          var date = new Date(items.createdAt);
+          var date2 = date.getFullYear() + '-' + (date.getMonth()+1) + '-' + date.getDate();
+          isi_data += "<div style='border: 1px solid #333; margin-top: 20px; text-align: left; padding:20px;'>";
+          isi_data += "<h1>" + items.title + "</h1>";
+          isi_data += "<p>Posted by <span>" + items.creator.name + "</span> on <span>" + date2 + "</span></p>";
+          isi_data += "<p class='lead'>" + items.content + "</p>";
+          isi_data += "<p style='font-weight: 800; text-align: right; padding-right: 20px;'><span class='mr-2'><a href='detail_post.html?postId=" + items._id + "'>View</a></span> <span class='mr-2'><a href='#' onclick='showModal(" + ids + ")'>Edit</a></span> <span class='mr-2'><a href='#' onclick='deletePost(" + ids + ")'>Delete</a></span></p>";
+          isi_data += "</div>";
+        });
+
+        $('#content-post').html(isi_data);
+      });
+    };
+
+    $('#add-post').submit(function(e){
+      if($('#modal-judul').html() == 'Edit Post' ){
+        e.preventDefault();
+        var id = $('#id-post').val();
+        var formData = new FormData();
+        var imagess = ($("#image"))[0].files[0];
+          formData.append('title', $('#title-post').val());
+          formData.append('content', $('textarea#content-post').val());
+          formData.append('image', imagess);
+
+        $.ajax({
+          url:'http://localhost:8080/babastudio/edit/' + id,
+          type: 'put',
+          data: formData,
+          cache: false,
+          dataType: 'json',
+          processData: false,
+          contentType: false,
+          success: function(result){
+            console.log(result);
+            $('#modal').modal('hide');
+            ReadData();
+          },
+          error: function(error){
+            console.log(error);
+          }
+        });
+      }
+    });
+
+    function deletePost(id){
+      var result = confirm('Apakah anda yakin ingin menghapus data ini?');
+      if(result){
+        $.ajax({
+          url:'http://localhost:8080/babastudio/delete/' + id,
+          type: 'delete',
+          success: function(result){
+            console.log(result);
+            ReadData();
+          },
+          error: function(error){
+            console.log(error);
+          }
+        });
+      }
+      return false;
+    }
+  </script>
+</body>
+</html>

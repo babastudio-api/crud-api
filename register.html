@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Babastudio API</title>
+    <link rel="shortcut icon" type="image/x-icon" href="https://www.babastudio.com/assets/front_page/img/icon/favicon.ico">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      h1{
+        border-bottom: 2px solid;
+        padding-bottom: 20px;
+      }
+
+      label{
+        font-size: 18px;
+      }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="https://getbootstrap.com/docs/4.3/examples/starter-template/starter-template.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-md fixed-top" style="background-image: linear-gradient(141deg, #212529 0%, #1f2ddb 51%, #e82c2c 75%);">
+      <a class="navbar-brand" href="index.html"><img src="https://www.babastudio.com/assets/front_page/img/icon/logo.png"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </nav>
+
+<main role="main" class="container">
+
+  <div class="starter-template">
+    <h1>Register API</h1>
+    <div id="content-post">
+      <form id="form-register"> 
+          <div class="form-group"> 
+              <label>Name</label> 
+              <input id="name" type="text" name="name" class="form-control" placeholder="name"> 
+          </div>
+
+          <div class="form-group"> 
+              <label>Email</label> 
+              <input id="email" type="email" name="email" class="form-control" placeholder="email"> 
+          </div>           
+
+          <div class="form-group"> 
+              <label>Password</label> 
+              <input id="password" type="password" name="password" class="form-control" placeholder="Password"> 
+          </div>
+
+          <button type="submit" class="btn btn-primary">Register</button> 
+      </form>
+    </div>
+  </div>
+
+</main><!-- /.container -->
+
+  <script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+  <script>
+    $('#form-register').submit(function(e){
+      e.preventDefault();
+      var formData = new FormData();
+      formData.append('name', $('#name').val());
+      formData.append('email', $('#email').val());
+      formData.append('password', $('#password').val());
+
+      $.ajax({
+          url:'http://localhost:8080/babastudio/signup',
+          type: 'post',
+          data: formData,
+          dataType: 'json',
+          processData: false,
+          contentType: false,
+          success: function(result){
+            console.log(result);
+            $('#name').val('');
+            $('#email').val('');
+            $('#password').val('');
+          },
+          error: function(error){
+            console.log(error);
+          }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Babastudio API</title>
+    <link rel="shortcut icon" type="image/x-icon" href="https://www.babastudio.com/assets/front_page/img/icon/favicon.ico">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      h1{
+        border-bottom: 2px solid;
+        padding-bottom: 20px;
+      }
+      p{
+        text-align: justify;
+      }
+      #detail_img{
+        width: 300px;
+        float: left;
+        margin-right: 20px;
+      }
+      #created{
+        color: grey;
+      }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="https://getbootstrap.com/docs/4.3/examples/starter-template/starter-template.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-md fixed-top" style="background-image: linear-gradient(141deg, #212529 0%, #1f2ddb 51%, #e82c2c 75%);">
+      <a class="navbar-brand" href="index.html"><img src="https://www.babastudio.com/assets/front_page/img/icon/logo.png"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto"></ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a href="#" class="nav-link" style="color: white;">Home</a>
+          </li>
+          <li><a href="#" class="nav-link" style="color: white;">Logout</a></li>
+        </ul>
+      </div>
+    </nav>
+
+<main role="main" class="container">
+
+  <div class="starter-template">
+    <h1 id="detail_judul">Detail Post</h1>
+    <div id="content-post">
+
+        <div>
+          <p id="created">Created By <span id="detail_creator">Babastudio</span> On <span id="detail_date">18-12-2018</span></p>
+          <img src="https://pbs.twimg.com/profile_images/1823845262/Profile-2.jpg" id="detail_img">
+          <p id="detail_desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris faucibus pulvinar felis in vestibulum. Mauris metus sem, rutrum accumsan pretium blandit, ullamcorper quis dolor. Maecenas nec purus sed massa lacinia consequat. Aenean rhoncus sem sed lacus rutrum tempor. Pellentesque iaculis eros fermentum accumsan venenatis. Nunc tincidunt ex a erat auctor, in congue mi elementum. Duis fermentum purus ut sapien congue pharetra. Quisque mollis ac risus et elementum. Duis viverra feugiat tortor, eget feugiat mi consequat non. Sed quis quam sit amet erat rutrum sodales. Sed risus lacus, varius vitae libero id, efficitur aliquet nibh. Nunc cursus neque eu efficitur consectetur. Vivamus imperdiet ultrices risus, ut efficitur tellus consequat in.
+
+Nullam auctor mi vitae velit aliquet, non lobortis sapien aliquam. Fusce molestie velit euismod tortor commodo, cursus mattis nulla interdum. Sed iaculis magna eget massa pulvinar, et iaculis augue ultricies. Duis imperdiet sem ac lacus feugiat luctus. Aenean sed eros nec sem laoreet aliquam ut vel ex. Morbi ut tortor ultrices, rutrum sem nec, sagittis metus. Maecenas tempor dui augue, molestie bibendum elit tincidunt fringilla. Etiam egestas, sapien ut finibus eleifend, erat nisl rhoncus mauris, eget lacinia ante arcu eu erat. Maecenas placerat quis felis eu congue. Nam condimentum posuere leo ac tempus. Suspendisse et leo mauris. Vestibulum euismod gravida eleifend. Quisque maximus sollicitudin tempus. Donec pretium odio non lacus viverra, vel venenatis nisl consequat. Nam sollicitudin, ligula vulputate lobortis dignissim, massa lorem lacinia elit, nec aliquam libero tortor eget quam. Fusce nec justo quis neque faucibus malesuada.
+
+In vel diam euismod augue fringilla efficitur eget non diam. Nam sollicitudin sem sit amet felis cursus dapibus. Etiam in felis ut quam fermentum mattis eu quis quam. Maecenas et dui ac orci efficitur ullamcorper. Aliquam et condimentum dui. Praesent imperdiet nisi sed urna facilisis interdum. Nulla vitae nunc suscipit, vestibulum augue sed, cursus sem. Sed a luctus quam, quis semper sem. Pellentesque cursus mi eu ligula maximus, dictum vehicula orci interdum.</p>
+        </div>
+    </div>
+  </div>
+
+</main><!-- /.container -->
+
+  <script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script>
+    $.urlParam = function(name){
+      var result = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+      return result[1] || 0;
+    }
+
+    var id = $.urlParam('postId');
+    $.getJSON('http://localhost:8080/babastudio/detail/' + id, function(data){
+      var detail = data.post;
+      var date = new Date(detail.createdAt);
+      var date2 = date.getFullYear() + '-' + (date.getMonth()+1) + '-' + date.getDate();
+      $('#detail_judul').html(detail.title);
+      $('#detail_creator').html(detail.creator.name);
+      $('#detail_date').html(date2);
+      $('#detail_img').attr('src','http://localhost:8080/images/' + detail.imageUrl);
+      $('#detail_desc').html(detail.content);
+    });
+  </script>
+</body>
+</html>
